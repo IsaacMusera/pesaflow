@@ -103,23 +103,20 @@ export function Dashboard() {
     <div className="dashboard-container">
       {/* Balance Cards */}
       <div className="balance-cards">
-        <div style={{
+        {/* Main Balance Card */}
+        <div className="balance-card" style={{
           background: 'linear-gradient(to bottom right, #2dd4bf, #10b981)',
-          borderRadius: '1rem',
-          padding: '1.5rem',
           color: 'white'
         }}>
-          <div style={{
-            fontSize: '0.875rem',
-            opacity: 0.9,
-            marginBottom: '0.5rem'
-          }}>Main Balance</div>
-          <div style={{
-            fontSize: '2.25rem',
-            fontWeight: 'bold'
-          }}>${mainBalance.toFixed(2)}</div>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+            Main Balance
+          </div>
+          <div style={{ fontSize: '2.25rem', fontWeight: 'bold' }}>
+            ${mainBalance.toFixed(2)}
+          </div>
         </div>
         
+        {/* Monthly Income Card */}
         <div className="balance-card">
           <div className="balance-card-header">
             <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>Monthly Income</div>
@@ -138,6 +135,7 @@ export function Dashboard() {
           </div>
         </div>
         
+        {/* Total Expenses Card */}
         <div className="balance-card">
           <div style={{ color: '#9ca3af', fontSize: '0.875rem', marginBottom: '0.5rem' }}>
             Total Expenses
@@ -165,12 +163,11 @@ export function Dashboard() {
               color: 'white',
               padding: '0.5rem 1rem',
               borderRadius: '0.5rem',
-              transition: 'background-color 0.3s ease',
+              border: 'none',
               cursor: 'pointer',
-              border: 'none'
+              fontSize: '0.875rem',
+              fontWeight: 600
             }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
           >
             <span style={{ fontSize: '1.125rem' }}>➕</span>
             Add Transaction
@@ -179,9 +176,10 @@ export function Dashboard() {
 
         {/* Transaction Table */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          {/* Table Header */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
+            gridTemplateColumns: 'auto auto 2fr 1fr 1fr auto',
             gap: '1rem',
             padding: '0.5rem 1rem',
             fontSize: '0.75rem',
@@ -195,21 +193,19 @@ export function Dashboard() {
             <div>Actions</div>
           </div>
 
+          {/* Transaction Rows */}
           {transactions.map((transaction) => (
             <div
               key={transaction.id}
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(6, 1fr)',
+                gridTemplateColumns: 'auto auto 2fr 1fr 1fr auto',
                 gap: '1rem',
                 padding: '0.75rem 1rem',
                 backgroundColor: '#1a2f42',
                 borderRadius: '0.5rem',
-                alignItems: 'center',
-                transition: 'background-color 0.3s ease'
+                alignItems: 'center'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#243a4f'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1a2f42'}
             >
               <div style={{
                 width: '2.5rem',
@@ -223,9 +219,15 @@ export function Dashboard() {
               }}>
                 {transaction.icon}
               </div>
-              <div style={{ color: '#d1d5db', fontSize: '0.875rem' }}>{transaction.date}</div>
-              <div style={{ color: 'white', fontSize: '0.875rem' }}>{transaction.description}</div>
-              <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>{transaction.category}</div>
+              <div style={{ color: '#d1d5db', fontSize: '0.875rem' }}>
+                {transaction.date}
+              </div>
+              <div style={{ color: 'white', fontSize: '0.875rem' }}>
+                {transaction.description}
+              </div>
+              <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
+                {transaction.category}
+              </div>
               <div style={{
                 fontSize: '0.875rem',
                 fontWeight: 600,
@@ -238,13 +240,11 @@ export function Dashboard() {
                 style={{
                   color: '#ef4444',
                   fontSize: '1.125rem',
-                  transition: 'color 0.3s ease',
                   cursor: 'pointer',
                   border: 'none',
-                  background: 'none'
+                  background: 'none',
+                  padding: '0.25rem'
                 }}
-                onMouseEnter={(e) => e.target.style.color = '#f87171'}
-                onMouseLeave={(e) => e.target.style.color = '#ef4444'}
               >
                 🗑️
               </button>
