@@ -1,0 +1,87 @@
+/* Transactions Page Styles */
+.transactions-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.transactions-header {
+  margin-bottom: 2rem;
+}
+
+.transactions-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.transactions-subtitle {
+  color: #9ca3af;
+}
+
+/* Search and Filter */
+.search-filter-section {
+  background-color: #0d1f30;
+  border: 1px solid #1a2f42;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.search-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+}
+
+.search-input {
+  width: 100%;
+  background-color: #1a2f42;
+  color: white;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.search-input:focus {
+  outline: 2px solid #10b981;
+  outline-offset: 0;
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+}
+
+/* All Transactions */
+.all-transactions {
+  background-color: #0d1f30;
+  border: 1px solid #1a2f42;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.all-transactions-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .search-filter-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
