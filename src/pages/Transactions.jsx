@@ -33,83 +33,187 @@ export function Transactions() {
   const totalExpense = transactions.filter(t => t.type === "expense").reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
   return (
-    <div className="space-y-6">
+    <div className="transactions-container">
       {/* Summary Cards */}
-      <div className="grid grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-white">
-          <div className="text-sm opacity-90 mb-2">Total Income</div>
-          <div className="text-3xl font-bold">${totalIncome.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
-          <div className="text-sm opacity-90 mt-2">This month</div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '1.5rem',
+        marginBottom: '2rem'
+      }}>
+        <div style={{
+          background: 'linear-gradient(to bottom right, #10b981, #14b8a6)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          color: 'white'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>Total Income</div>
+          <div style={{ fontSize: '1.875rem', fontWeight: 'bold' }}>
+            ${totalIncome.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </div>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>This month</div>
         </div>
         
-        <div className="bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl p-6 text-white">
-          <div className="text-sm opacity-90 mb-2">Total Expenses</div>
-          <div className="text-3xl font-bold">${totalExpense.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
-          <div className="text-sm opacity-90 mt-2">This month</div>
+        <div style={{
+          background: 'linear-gradient(to bottom right, #ef4444, #ec4899)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          color: 'white'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>Total Expenses</div>
+          <div style={{ fontSize: '1.875rem', fontWeight: 'bold' }}>
+            ${totalExpense.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </div>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>This month</div>
         </div>
         
-        <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
-          <div className="text-sm opacity-90 mb-2">Net Balance</div>
-          <div className="text-3xl font-bold">${(totalIncome - totalExpense).toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
-          <div className="text-sm opacity-90 mt-2">This month</div>
+        <div style={{
+          background: 'linear-gradient(to bottom right, #3b82f6, #a855f7)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          color: 'white'
+        }}>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginBottom: '0.5rem' }}>Net Balance</div>
+          <div style={{ fontSize: '1.875rem', fontWeight: 'bold' }}>
+            ${(totalIncome - totalExpense).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </div>
+          <div style={{ fontSize: '0.875rem', opacity: 0.9, marginTop: '0.5rem' }}>This month</div>
         </div>
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-6">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex-1 relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+      <div style={{
+        backgroundColor: '#0d1f30',
+        border: '1px solid #1a2f42',
+        borderRadius: '1rem',
+        padding: '1.5rem',
+        marginBottom: '2rem'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          <div className="search-wrapper" style={{ flex: '1', minWidth: '250px' }}>
+            <span className="search-icon">🔍</span>
             <input
               type="text"
               placeholder="Search transactions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#1a2f42] text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="search-input"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button
               onClick={() => setFilter("all")}
-              className={`px-4 py-3 rounded-lg transition-colors ${
-                filter === "all"
-                  ? "bg-emerald-500 text-white"
-                  : "bg-[#1a2f42] text-gray-400 hover:text-white"
-              }`}
+              style={{
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem',
+                transition: 'all 0.3s ease',
+                backgroundColor: filter === "all" ? '#10b981' : '#1a2f42',
+                color: filter === "all" ? 'white' : '#9ca3af',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (filter !== "all") e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                if (filter !== "all") e.target.style.color = '#9ca3af';
+              }}
             >
               All
             </button>
             <button
               onClick={() => setFilter("income")}
-              className={`px-4 py-3 rounded-lg transition-colors ${
-                filter === "income"
-                  ? "bg-emerald-500 text-white"
-                  : "bg-[#1a2f42] text-gray-400 hover:text-white"
-              }`}
+              style={{
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem',
+                transition: 'all 0.3s ease',
+                backgroundColor: filter === "income" ? '#10b981' : '#1a2f42',
+                color: filter === "income" ? 'white' : '#9ca3af',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (filter !== "income") e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                if (filter !== "income") e.target.style.color = '#9ca3af';
+              }}
             >
               Income
             </button>
             <button
               onClick={() => setFilter("expense")}
-              className={`px-4 py-3 rounded-lg transition-colors ${
-                filter === "expense"
-                  ? "bg-emerald-500 text-white"
-                  : "bg-[#1a2f42] text-gray-400 hover:text-white"
-              }`}
+              style={{
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem',
+                transition: 'all 0.3s ease',
+                backgroundColor: filter === "expense" ? '#10b981' : '#1a2f42',
+                color: filter === "expense" ? 'white' : '#9ca3af',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (filter !== "expense") e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                if (filter !== "expense") e.target.style.color = '#9ca3af';
+              }}
             >
               Expenses
             </button>
           </div>
 
-          <div className="flex gap-2">
-            <button className="p-3 bg-[#1a2f42] text-gray-400 hover:text-white rounded-lg transition-colors text-lg">
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button style={{
+              padding: '0.75rem',
+              backgroundColor: '#1a2f42',
+              color: '#9ca3af',
+              borderRadius: '0.5rem',
+              transition: 'color 0.3s ease',
+              fontSize: '1.125rem',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => e.target.style.color = 'white'}
+            onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+            >
               📅
             </button>
-            <button className="p-3 bg-[#1a2f42] text-gray-400 hover:text-white rounded-lg transition-colors text-lg">
+            <button style={{
+              padding: '0.75rem',
+              backgroundColor: '#1a2f42',
+              color: '#9ca3af',
+              borderRadius: '0.5rem',
+              transition: 'color 0.3s ease',
+              fontSize: '1.125rem',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => e.target.style.color = 'white'}
+            onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+            >
               🔽
             </button>
-            <button className="p-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors text-lg">
+            <button style={{
+              padding: '0.75rem',
+              backgroundColor: '#10b981',
+              color: 'white',
+              borderRadius: '0.5rem',
+              transition: 'background-color 0.3s ease',
+              fontSize: '1.125rem',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
+            >
               ⬇️
             </button>
           </div>
@@ -117,58 +221,131 @@ export function Transactions() {
       </div>
 
       {/* Transactions Table */}
-      <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+      <div style={{
+        backgroundColor: '#0d1f30',
+        border: '1px solid #1a2f42',
+        borderRadius: '1rem',
+        overflow: 'hidden'
+      }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr className="border-b border-[#1a2f42]">
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">
+              <tr style={{ borderBottom: '1px solid #1a2f42' }}>
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>
                   Icon
                 </th>
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>
                   Date
                 </th>
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">Description</th>
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">Category</th>
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>Description</th>
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>Category</th>
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>
                   Amount
                 </th>
-                <th className="text-left p-4 text-gray-400 text-sm font-medium">Status</th>
+                <th style={{
+                  textAlign: 'left',
+                  padding: '1rem',
+                  color: '#9ca3af',
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}>Status</th>
               </tr>
             </thead>
             <tbody>
               {filteredTransactions.map((transaction) => (
                 <tr
                   key={transaction.id}
-                  className="border-b border-[#1a2f42] hover:bg-[#1a2f42] transition-colors"
+                  style={{
+                    borderBottom: '1px solid #1a2f42',
+                    transition: 'background-color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1a2f42'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
-                  <td className="p-4">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl ${
-                      transaction.type === "income" ? "bg-emerald-500/20" : "bg-red-500/20"
-                    }`}>
+                  <td style={{ padding: '1rem' }}>
+                    <div style={{
+                      width: '2.5rem',
+                      height: '2.5rem',
+                      borderRadius: '0.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.25rem',
+                      backgroundColor: transaction.type === "income" ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'
+                    }}>
                       {transaction.icon}
                     </div>
                   </td>
-                  <td className="p-4 text-gray-300 text-sm">
+                  <td style={{
+                    padding: '1rem',
+                    color: '#d1d5db',
+                    fontSize: '0.875rem'
+                  }}>
                     {new Date(transaction.date).toLocaleDateString('en-US', { 
                       month: 'short', 
                       day: 'numeric',
                       year: 'numeric'
                     })}
                   </td>
-                  <td className="p-4 text-white font-medium">{transaction.description}</td>
-                  <td className="p-4 text-gray-400 text-sm">{transaction.category}</td>
-                  <td className={`p-4 font-semibold ${
-                    transaction.type === "income" ? "text-emerald-400" : "text-white"
-                  }`}>
+                  <td style={{
+                    padding: '1rem',
+                    color: 'white',
+                    fontWeight: 500
+                  }}>{transaction.description}</td>
+                  <td style={{
+                    padding: '1rem',
+                    color: '#9ca3af',
+                    fontSize: '0.875rem'
+                  }}>{transaction.category}</td>
+                  <td style={{
+                    padding: '1rem',
+                    fontWeight: 600,
+                    color: transaction.type === "income" ? '#10b981' : 'white'
+                  }}>
                     {transaction.amount >= 0 ? "+" : ""}{transaction.amount.toFixed(2)}
                   </td>
-                  <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-xs ${
-                      transaction.status === "completed"
-                        ? "bg-emerald-500/20 text-emerald-400"
-                        : "bg-yellow-500/20 text-yellow-400"
-                    }`}>
+                  <td style={{ padding: '1rem' }}>
+                    <span style={{
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.75rem',
+                      backgroundColor: transaction.status === "completed" 
+                        ? 'rgba(16, 185, 129, 0.2)' 
+                        : 'rgba(234, 179, 8, 0.2)',
+                      color: transaction.status === "completed"
+                        ? '#10b981'
+                        : '#eab308'
+                    }}>
                       {transaction.status}
                     </span>
                   </td>

@@ -17,115 +17,108 @@ export function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a1929] flex">
+    <div className="landing-container">
       {/* Left Side - Image */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-emerald-500 to-teal-600">
+      <div className="landing-image-section">
         <img
           src="https://images.unsplash.com/photo-1758526214018-a746f9554b8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBiYW5raW5nJTIwYXBwJTIwZGlnaXRhbHxlbnwxfHx8fDE3NzI5MjI3ODh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
           alt="Banking"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
         />
-        <div className="relative z-10 flex flex-col justify-center px-12 text-white">
-          <h1 className="text-5xl font-bold mb-4">Welcome to Pesa Flow</h1>
-          <p className="text-xl opacity-90">Manage your finances with ease and confidence</p>
+        <div className="landing-image-content">
+          <h1>Welcome to Pesa Flow</h1>
+          <p>Manage your finances with ease and confidence</p>
         </div>
       </div>
 
       {/* Right Side - Auth Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-        <div className="w-full max-w-md">
+      <div className="landing-form-section">
+        <div className="landing-form-wrapper">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-emerald-500 rounded-lg flex items-center justify-center">
-              <span className="text-white text-2xl">💰</span>
+          <div className="landing-logo">
+            <div className="landing-logo-icon">
+              <span>💰</span>
             </div>
-            <span className="text-white font-semibold text-2xl">Pesa Flow</span>
+            <span className="landing-logo-text">Pesa Flow</span>
           </div>
 
           {/* Auth Form */}
-          <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-8">
-            <h2 className="text-white text-3xl font-bold mb-2">
+          <div className="landing-form-card">
+            <h2 className="landing-form-title">
               {isLogin ? "Welcome Back" : "Get Started"}
             </h2>
-            <p className="text-gray-400 mb-8">
+            <p className="landing-form-subtitle">
               {isLogin ? "Sign in to your account" : "Create your account"}
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="landing-form">
               {!isLogin && (
-                <div>
-                  <label className="text-gray-300 text-sm mb-2 block">Full Name</label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">👤</span>
+                <div className="landing-form-group">
+                  <label className="landing-form-label">Full Name</label>
+                  <div className="landing-input-wrapper">
+                    <span className="landing-input-icon">👤</span>
                     <input
                       type="text"
                       placeholder="Enter your name"
-                      className="w-full bg-[#1a2f42] text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="landing-input"
                       required
                     />
                   </div>
                 </div>
               )}
 
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Email</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">📧</span>
+              <div className="landing-form-group">
+                <label className="landing-form-label">Email</label>
+                <div className="landing-input-wrapper">
+                  <span className="landing-input-icon">📧</span>
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full bg-[#1a2f42] text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="landing-input"
                     required
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Password</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔒</span>
+              <div className="landing-form-group">
+                <label className="landing-form-label">Password</label>
+                <div className="landing-input-wrapper">
+                  <span className="landing-input-icon">🔒</span>
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    className="w-full bg-[#1a2f42] text-white pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="landing-input"
                     required
                   />
                 </div>
               </div>
 
               {isLogin && (
-                <div className="flex justify-end">
-                  <button type="button" className="text-emerald-400 text-sm hover:text-emerald-300">
+                <div className="landing-forgot-password">
+                  <button type="button" className="landing-forgot-btn">
                     Forgot password?
                   </button>
                 </div>
               )}
 
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 group"
-              >
+              <button type="submit" className="landing-submit-btn">
                 {isLogin ? "Sign In" : "Create Account"}
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <span>→</span>
               </button>
             </form>
 
             {/* Divider */}
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#1a2f42]"></div>
+            <div className="landing-divider">
+              <div className="landing-divider-line">
+                <div></div>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-[#0d1f30] text-gray-400">Or continue with</span>
+              <div className="landing-divider-text">
+                <span>Or continue with</span>
               </div>
             </div>
 
             {/* Google Login */}
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full bg-white hover:bg-gray-100 text-gray-800 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-3"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
+            <button onClick={handleGoogleLogin} className="landing-google-btn">
+              <svg style={{ width: '1.25rem', height: '1.25rem' }} viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -147,14 +140,14 @@ export function Landing() {
             </button>
 
             {/* Toggle Login/Signup */}
-            <div className="mt-6 text-center">
-              <span className="text-gray-400">
+            <div className="landing-toggle-section">
+              <span className="landing-toggle-text">
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
               <button
                 type="button"
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-emerald-400 hover:text-emerald-300 font-semibold"
+                className="landing-toggle-btn"
               >
                 {isLogin ? "Sign Up" : "Sign In"}
               </button>

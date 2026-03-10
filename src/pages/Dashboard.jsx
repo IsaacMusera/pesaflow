@@ -9,7 +9,7 @@ export function Dashboard() {
       description: "McDonald's",
       category: "Food",
       amount: -12.50,
-      color: "bg-red-500",
+      color: "#ef4444",
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ export function Dashboard() {
       description: "Salary Deposit",
       category: "Income",
       amount: 4200.00,
-      color: "bg-emerald-500",
+      color: "#10b981",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ export function Dashboard() {
       description: "Grocery Store",
       category: "Shopping",
       amount: -85.30,
-      color: "bg-blue-500",
+      color: "#3b82f6",
     },
   ]);
 
@@ -43,12 +43,12 @@ export function Dashboard() {
   });
 
   const categories = [
-    { name: "Food", icon: "🍔", color: "bg-red-500" },
-    { name: "Income", icon: "💰", color: "bg-emerald-500" },
-    { name: "Shopping", icon: "🛒", color: "bg-blue-500" },
-    { name: "Transport", icon: "🚗", color: "bg-yellow-500" },
-    { name: "Entertainment", icon: "🎬", color: "bg-purple-500" },
-    { name: "Bills", icon: "📱", color: "bg-orange-500" },
+    { name: "Food", icon: "🍔", color: "#ef4444" },
+    { name: "Income", icon: "💰", color: "#10b981" },
+    { name: "Shopping", icon: "🛒", color: "#3b82f6" },
+    { name: "Transport", icon: "🚗", color: "#eab308" },
+    { name: "Entertainment", icon: "🎬", color: "#a855f7" },
+    { name: "Bills", icon: "📱", color: "#f97316" },
   ];
 
   const totalIncome = transactions
@@ -100,55 +100,93 @@ export function Dashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="dashboard-container">
       {/* Balance Cards */}
-      <div className="grid grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-teal-400 to-emerald-500 rounded-2xl p-6 text-white">
-          <div className="text-sm opacity-90 mb-2">Main Balance</div>
-          <div className="text-4xl font-bold">${mainBalance.toFixed(2)}</div>
+      <div className="balance-cards">
+        <div style={{
+          background: 'linear-gradient(to bottom right, #2dd4bf, #10b981)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          color: 'white'
+        }}>
+          <div style={{
+            fontSize: '0.875rem',
+            opacity: 0.9,
+            marginBottom: '0.5rem'
+          }}>Main Balance</div>
+          <div style={{
+            fontSize: '2.25rem',
+            fontWeight: 'bold'
+          }}>${mainBalance.toFixed(2)}</div>
         </div>
         
-        <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-6">
-          <div className="flex items-center justify-between mb-2">
-            <div className="text-gray-400 text-sm">Monthly Income</div>
+        <div className="balance-card">
+          <div className="balance-card-header">
+            <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>Monthly Income</div>
             <button
               onClick={() => setShowIncomeModal(true)}
-              className="text-emerald-400 hover:text-emerald-300 transition-colors text-lg"
+              className="balance-edit-btn"
             >
               ✏️
             </button>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="text-3xl font-bold text-white">${monthlyIncome.toFixed(2)}</div>
-            <span className="text-emerald-400 text-xl">📈</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white' }}>
+              ${monthlyIncome.toFixed(2)}
+            </div>
+            <span style={{ color: '#10b981', fontSize: '1.25rem' }}>📈</span>
           </div>
         </div>
         
-        <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-6">
-          <div className="text-gray-400 text-sm mb-2">Total Expenses</div>
-          <div className="flex items-center gap-2">
-            <div className="text-3xl font-bold text-white">${totalExpenses.toFixed(2)}</div>
-            <span className="text-red-400 text-xl">📉</span>
+        <div className="balance-card">
+          <div style={{ color: '#9ca3af', fontSize: '0.875rem', marginBottom: '0.5rem' }}>
+            Total Expenses
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white' }}>
+              ${totalExpenses.toFixed(2)}
+            </div>
+            <span style={{ color: '#f87171', fontSize: '1.25rem' }}>📉</span>
           </div>
         </div>
       </div>
 
       {/* Recent Transactions */}
-      <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white">Recent Transactions</h2>
+      <div className="recent-transactions">
+        <div className="recent-transactions-header">
+          <h2 className="recent-transactions-title">Recent Transactions</h2>
           <button 
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg transition-colors"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              backgroundColor: '#10b981',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              transition: 'background-color 0.3s ease',
+              cursor: 'pointer',
+              border: 'none'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
           >
-            <span className="text-lg">➕</span>
+            <span style={{ fontSize: '1.125rem' }}>➕</span>
             Add Transaction
           </button>
         </div>
 
         {/* Transaction Table */}
-        <div className="space-y-1">
-          <div className="grid grid-cols-6 gap-4 px-4 py-2 text-xs text-gray-400">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(6, 1fr)',
+            gap: '1rem',
+            padding: '0.5rem 1rem',
+            fontSize: '0.75rem',
+            color: '#9ca3af'
+          }}>
             <div>Icon</div>
             <div>Date</div>
             <div>Description</div>
@@ -160,20 +198,53 @@ export function Dashboard() {
           {transactions.map((transaction) => (
             <div
               key={transaction.id}
-              className="grid grid-cols-6 gap-4 px-4 py-3 bg-[#1a2f42] rounded-lg items-center hover:bg-[#243a4f] transition-colors"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(6, 1fr)',
+                gap: '1rem',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#1a2f42',
+                borderRadius: '0.5rem',
+                alignItems: 'center',
+                transition: 'background-color 0.3s ease'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#243a4f'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1a2f42'}
             >
-              <div className={`w-10 h-10 ${transaction.color} rounded-lg flex items-center justify-center text-xl`}>
+              <div style={{
+                width: '2.5rem',
+                height: '2.5rem',
+                backgroundColor: transaction.color,
+                borderRadius: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.25rem'
+              }}>
                 {transaction.icon}
               </div>
-              <div className="text-gray-300 text-sm">{transaction.date}</div>
-              <div className="text-white text-sm">{transaction.description}</div>
-              <div className="text-gray-400 text-sm">{transaction.category}</div>
-              <div className={`text-sm font-semibold ${transaction.amount > 0 ? "text-emerald-400" : "text-white"}`}>
+              <div style={{ color: '#d1d5db', fontSize: '0.875rem' }}>{transaction.date}</div>
+              <div style={{ color: 'white', fontSize: '0.875rem' }}>{transaction.description}</div>
+              <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>{transaction.category}</div>
+              <div style={{
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                color: transaction.amount > 0 ? '#10b981' : 'white'
+              }}>
                 {transaction.amount > 0 ? "+" : ""}{transaction.amount.toFixed(2)}
               </div>
               <button 
                 onClick={() => handleDeleteTransaction(transaction.id)}
-                className="text-red-400 hover:text-red-300 transition-colors text-lg"
+                style={{
+                  color: '#ef4444',
+                  fontSize: '1.125rem',
+                  transition: 'color 0.3s ease',
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: 'none'
+                }}
+                onMouseEnter={(e) => e.target.style.color = '#f87171'}
+                onMouseLeave={(e) => e.target.style.color = '#ef4444'}
               >
                 🗑️
               </button>
@@ -181,7 +252,11 @@ export function Dashboard() {
           ))}
 
           {transactions.length === 0 && (
-            <div className="text-center py-12 text-gray-400">
+            <div style={{
+              textAlign: 'center',
+              padding: '3rem 1rem',
+              color: '#9ca3af'
+            }}>
               No transactions yet. Add your first transaction!
             </div>
           )}
@@ -190,29 +265,29 @@ export function Dashboard() {
 
       {/* Add Transaction Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-8 w-full max-w-md">
-            <h3 className="text-2xl font-bold text-white mb-6">Add New Transaction</h3>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="modal-title">Add New Transaction</h3>
             
-            <form onSubmit={handleAddTransaction} className="space-y-4">
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Description</label>
+            <form onSubmit={handleAddTransaction} className="transaction-form">
+              <div className="form-group">
+                <label className="form-label">Description</label>
                 <input
                   type="text"
                   value={newTransaction.description}
                   onChange={(e) => setNewTransaction({...newTransaction, description: e.target.value})}
                   placeholder="Enter description"
-                  className="w-full bg-[#1a2f42] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Category</label>
+              <div className="form-group">
+                <label className="form-label">Category</label>
                 <select
                   value={newTransaction.category}
                   onChange={(e) => setNewTransaction({...newTransaction, category: e.target.value})}
-                  className="w-full bg-[#1a2f42] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="form-select"
                 >
                   {categories.map(cat => (
                     <option key={cat.name} value={cat.name}>{cat.icon} {cat.name}</option>
@@ -220,30 +295,30 @@ export function Dashboard() {
                 </select>
               </div>
 
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Amount</label>
+              <div className="form-group">
+                <label className="form-label">Amount</label>
                 <input
                   type="number"
                   step="0.01"
                   value={newTransaction.amount}
                   onChange={(e) => setNewTransaction({...newTransaction, amount: e.target.value})}
                   placeholder="Enter amount"
-                  className="w-full bg-[#1a2f42] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div className="flex gap-4 mt-6">
+              <div className="modal-buttons">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 px-4 py-3 bg-[#1a2f42] hover:bg-[#243a4f] text-white rounded-lg transition-colors"
+                  className="modal-btn-cancel"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors"
+                  className="modal-btn-save"
                 >
                   Add Transaction
                 </button>
@@ -255,35 +330,35 @@ export function Dashboard() {
 
       {/* Update Income Modal */}
       {showIncomeModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#0d1f30] border border-[#1a2f42] rounded-2xl p-8 w-full max-w-md">
-            <h3 className="text-2xl font-bold text-white mb-6">Update Monthly Income</h3>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="modal-title">Update Monthly Income</h3>
             
-            <form onSubmit={handleUpdateIncome} className="space-y-4">
-              <div>
-                <label className="text-gray-300 text-sm mb-2 block">Income</label>
+            <form onSubmit={handleUpdateIncome} className="transaction-form">
+              <div className="form-group">
+                <label className="form-label">Income</label>
                 <input
                   type="number"
                   step="0.01"
                   value={incomeInput}
                   onChange={(e) => setIncomeInput(e.target.value)}
                   placeholder="Enter income"
-                  className="w-full bg-[#1a2f42] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div className="flex gap-4 mt-6">
+              <div className="modal-buttons">
                 <button
                   type="button"
                   onClick={() => setShowIncomeModal(false)}
-                  className="flex-1 px-4 py-3 bg-[#1a2f42] hover:bg-[#243a4f] text-white rounded-lg transition-colors"
+                  className="modal-btn-cancel"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors"
+                  className="modal-btn-save"
                 >
                   Update Income
                 </button>
